@@ -1,0 +1,56 @@
+# 기본 설정
+spring:
+  profiles:
+    active: local # 기본적으로 local이 선택된다는 뜻
+  mvc:
+    view:
+      prefix: /WEB-INF/jsp/ 
+      suffix: .jsp
+  datasource:
+    # driver-class-name: com.mysql.cj.jdbc.Driver
+    driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+    url: jdbc:log4jdbc:mysql://127.0.0.1:3306/cuni?autoReconnect=true&useUnicode=true&characterEncoding=utf8&serverTimezone=UTC
+    username: root
+    password: ''
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 100MB
+      max-request-size: 100MB      
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: 
+    password: 
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+mybatis:
+  type-aliases-package: com.sbs.cuni.dto
+custom:
+  logoText: CUNI
+  uploadDir: C:/work/ksh/uploads
+  emailSender: no-reply@noreply.com
+  emailSenderName: CUNI Master
+
+---
+
+
+spring:
+  profiles: local
+server:
+  port: 8085
+
+---
+
+# 운영환경만의 설정
+spring:
+  profiles: production
+logging:
+  level:
+    root: info
+server:
+  port: 8084
